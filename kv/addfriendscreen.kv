@@ -1,0 +1,34 @@
+<AddFriendScreen>:
+    canvas:
+        Color:
+            rgb: utils.get_color_from_hex("#14469D")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    
+
+    GridLayout:
+    # Add 3 Menu buttons here
+        rows: 1
+        pos_hint: {"top": .2, "left": 1}
+        size_hint: 1, .2
+        ImageButton: # chat button
+            source: "icons/chat8.png"
+            on_release:
+                print("RELEASED CHAT BUTTON")
+                app.change_screen("chat_screen")
+
+        ImageButton:
+            source: "icons/burger8_1.png"
+            on_press:
+                self.source = "icons/burger8_2.png"
+            on_release:
+                self.source = "icons/burger8_1.png"
+                print("RELEASED BURGER BUTTON")
+                app.change_screen("home_screen")
+
+        ImageButton:
+            source: "icons/settings8.png"
+            on_release:
+                print("RELEASED SETTINGS BUTTON")
+                app.change_screen("settings_screen")

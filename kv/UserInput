@@ -1,0 +1,46 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from datetime import datetime
+
+class UserInputApp(App):
+    def build(self):
+        self.layout = BoxLayout(orientation='vertical', spacing=10, padding=20)
+
+        self.name_input = TextInput(hint_text="Enter your name")
+        self.location_input = TextInput(hint_text="Where do you usually have lunch?")
+        self.time_input = TextInput(hint_text="When do you usually have lunch? (HH:MM)")
+
+        self.submit_button = Button(text="Submit")
+        self.submit_button.bind(on_press=self.validate_and_submit)
+
+        self.layout.add_widget(Label(text="Name:"))
+        self.layout.add_widget(self.name_input)
+        self.layout.add_widget(Label(text="Location:"))
+        self.layout.add_widget(self.location_input)
+        self.layout.add_widget(Label(text="Time:"))
+        self.layout.add_widget(self.time_input)
+        self.layout.add_widget(self.submit_button)
+
+        return self.layout
+
+    def validate_and_submit(self, instance):
+        name = self.name_input.text.strip()
+        location = self.location_input.text.strip()
+        lunch_time = self.time_input.text.strip()
+
+        if not name or not location or not lunch_time:
+            self.layout.add_widget(Label(text="Please fill in all fields.", color=(1, 0, 0, 1)))
+        else:
+            try:
+                datetime.strptime(lunch_time, "%H:%M")
+                self.layout.add_widget(Label(text="Name: " + name))
+                self.layout.add_widget(Label(text="Location: " + location))
+                self.layout.add_widget(Label(text="Time: " + lunch_time))
+            except ValueError:
+                self.layout.add_widget(Label(text="Invalid time format. Use 'HH:MM'", color=(1, 0, 0, 1)))
+
+if __name__ == '__main__':
+    UserInputApp().run()

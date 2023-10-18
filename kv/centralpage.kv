@@ -1,0 +1,43 @@
+#:import utils kivy.utils
+
+<CentralPage>:
+    canvas.before:
+        Color:
+            rgba: 1, 165/255, 0, 1
+        Rectangle:
+            size: self.width * 0.75, self.height * 0.85
+            pos: self.width * 0.5 - (self.width * 0.75 * 0.5), self.height * 0.5 - (self.height * 0.85 * 0.5)
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Content Above'
+            size_hint_y: None
+            height: '50dp'  # Adjust the height as needed
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '125dp'  # Adjust the height as needed
+
+            ImageButton: # chat button
+                source: "icons/PenguinPizza.png"
+                on_release:
+                    print("RELEASED CHAT BUTTON")
+                    app.change_screen("feed_screen")
+
+            Label:
+                text: 'Button 2'
+            
+            ImageButton: # chat button
+                source: "icons/chat8.png"
+                on_release:
+                    print("RELEASED CHAT BUTTON")
+                    app.change_screen("chat_screen")
+
+            ImageButton: # chat button
+                source: "icons/settings8.png"
+                on_release:
+                    print("RELEASED CHAT BUTTON")
+                    app.change_screen("settings_screen")

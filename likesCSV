@@ -1,0 +1,49 @@
+import csv
+
+class likesCSV:
+    def __init__(self,userName,file_name='file_name.csv'):
+        self.userName =userName
+        self.file_name= file_name
+    def store_data(self,theyLike):
+        with open(self.file_name, 'r', newline='') as file:
+            rows = list(csv.reader(file))
+
+        # Update rows based on the conditions
+        for row in rows:
+            if row[0] == self.userName:
+                for i in range(len(rows)):
+                    if rows[i][0] == theyLike:
+                        row[0][i] = theyLike
+                        break
+                break
+
+        # Write back the updated rows to the CSV
+        with open(self.file_name, 'w', newline='') as file:
+            csvwriter = csv.writer(file)
+            csvwriter.writerows(rows)
+
+    def newUser(self,user):
+        with open(self.file_name, 'r', newline='') as file:
+            rows = list(csv.reader(file))
+        if len(rows)==0:
+            rows.append(user)
+            rows.append([])
+        else:
+            for i in range(len(rows)):
+                if i!=len(rows)-1:
+                    rows[1][i].append(0)
+                else:
+                    for x in range(len(rows[1][i])):
+                        rows[1][i].append(0)
+
+
+        with open(self.file_name, 'w', newline='') as file:
+            csvwriter = csv.writer(file)
+            csvwriter.writerows(rows)
+
+
+            
+
+
+
+

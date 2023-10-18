@@ -1,0 +1,49 @@
+<UserInputApp>:
+    FloatLayout:
+        Label:
+            text: "Tell a little bit about yourself first"
+            size_hint: 1, .1
+            pos_hint: {"top": 1, "center_x": 0.5}
+            font_size: "20sp"
+
+        TextInput:
+            id: name_input
+            hint_text: "Enter your name"
+            size_hint: .8, .1
+            pos_hint: {"center_x": 0.5, "top": 0.85}
+            multiline: False
+
+        TextInput:
+            id: username_input
+            hint_text: "Enter your preferred pronouns"
+            size_hint: .8, .1
+            pos_hint: {"center_x": 0.5, "top": 0.72}
+            multiline: False
+
+        TextInput:
+            id: password_input
+            hint_text: "Enter your major"
+            size_hint: .8, .1
+            pos_hint: {"center_x": 0.5, "top": 0.59}
+            multiline: False
+
+        Button:
+            text: "Continue"
+            on_press: app.validate_and_submit(self)
+            size_hint: .8, .1
+            pos_hint: {"center_x": 0.5, "top": 0.46}
+            on_release:
+                #change screen to bio input
+                #call initBio
+                #put inside database somehow
+                app.sign_up(email_input.text, username_input.text, password_input.text)
+                app.change_screen("second_bio_screen")
+
+        Label:
+            id: message_label
+            text: ""
+            size_hint: 1, .1
+            pos_hint: {"top": 0.35, "center_x": 0.5}
+            color: 1, 0, 0, 1
+
+        python user_input_app.py
