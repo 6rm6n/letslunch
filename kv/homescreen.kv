@@ -8,26 +8,46 @@
             Rectangle:
                 size: self.size
                 pos: self.pos
-#---   
+            Color:
+                rgb: utils.get_color_from_hex("#A2B3F2")
+            Rectangle:
+                size: self.width * 0.75, self.height * 0.6  # Adjust these values for desired size
+                pos: self.width * 0.5 - (self.width * 0.75 * 0.5), self.height * 0.5 - (self.height * 0.6 * 0.5)
+
+        Button:
+            size_hint: 0.05, 0.05
+            pos_hint: {'center_x': 0.09375, 'center_y': 0.45}
+            background_normal: 'love.png'
+            on_press: root.doesLike(self)
+
+        Button:
+            size_hint: 0.05, 0.05
+            pos_hint: {'center_x': 0.281, 'center_y': 0.45}
+            background_normal: 'no.png'
+            on_press: root.doesNot(self)
+
         GridLayout:
             rows: 1
-            pos_hint: {"top": 1, "left": 1}
-            size_hint: 1, .1
-            Image:
-                source: "icons/burger8_1.png"
-            Image:
-                source: "icons/pizza8.png"
-#---       
+            size_hint: None, None
+            #size_hint: 1, .1
+            pos_hint: {"top": .99, "right": .99}
+            ImageButton:
+                source: "icons/magnify8.png"
+                on_release:
+                    app.change_screen("add_friend_screen")
+                    print('Find friend')
+#---
         GridLayout:
             # Put two weather icons and avatar icon
             rows: 1
             pos_hint: {"top": .9, "left": 1}
-            size_hint: 1, .2
+            size_hint: 1, .1
             # put two weather icons and avatar icon
             Image:
                 source: "icons/burger8_1.png"
-            Image:
+            ImageButton:
                 source: "icons/pizza8.png"
+                on_press: app.change_screen("signup_screen")
             Image:
                 source: "icons/burger8_2.png"
 
@@ -48,11 +68,11 @@
             rows: 1
             pos_hint: {"top": .2, "left": 1}
             size_hint: 1, .2
-            ImageButton:
+            ImageButton: # chat button
                 source: "icons/chat8.png"
                 on_release:
                     print("RELEASED CHAT BUTTON")
-                    app.change_screen("signup_screen")
+                    app.change_screen("chat_screen")
 
             ImageButton:
                 source: "icons/burger8_1.png"
