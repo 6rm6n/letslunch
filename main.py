@@ -47,6 +47,7 @@ class CentralPage(Screen):
 
 class ChatMessage(Label):
     pass
+
 class BioValidation(Screen):
     pass
 

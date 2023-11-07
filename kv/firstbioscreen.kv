@@ -8,21 +8,21 @@
             font_size: "20sp"
 
         TextInput:
-            id: email_input
+            id: name_input
             hint_text: "Enter your name"
             size_hint: .8, .1
             pos_hint: {"center_x": 0.5, "top": 0.85}
             multiline: False
 
         TextInput:
-            id: username_input
+            id: pronouns_input
             hint_text: "Enter your preferred pronouns"
             size_hint: .8, .1
             pos_hint: {"center_x": 0.5, "top": 0.72}
             multiline: False
 
         TextInput:
-            id: password_input
+            id: major_input
             hint_text: "Enter your major"
             size_hint: .8, .1
             pos_hint: {"center_x": 0.5, "top": 0.59}
@@ -38,7 +38,7 @@
                 #put inside database somehow
                 #call Myra's validation function
                 
-                app.sign_up(email_input.text, username_input.text, password_input.text)
+                app.sign_up(name_input.text, pronouns_input.text, major_input.text)
                 app.change_screen("second_bio_screen")
 
         Label:

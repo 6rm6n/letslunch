@@ -8,7 +8,7 @@
             font_size: "20sp"
 
         TextInput:
-            id: email_input
+            id: about_input
             hint_text: "Tell a little bit about yourself"
             size_hint: .8, .3
             pos_hint: {"center_x": 0.5, "top": 0.85}
@@ -23,7 +23,7 @@
                 #change screen to bio input
                 #call initBio
                 #put inside database somehow
-                app.change_screen("third_bio_screen")
+                app.change_screen("bio_validation_screen")
 
         Label:
             id: message_label
