@@ -1,13 +1,12 @@
 #:include kv/homescreen.kv 
 #:include kv/settingsscreen.kv
-#:include kv/signupscreen.kv
 #:include kv/chatscreen.kv
 #:include kv/addfriendscreen.kv
-#:include kv/firstbioscreen.kv
-#:include kv/secondbioscreen.kv
-#:include kv/thirdbioscreen.kv
+#:include kv/signup1screen.kv
+#:include kv/signup2screen.kv
+#:include kv/signup3screen.kv
+#:include kv/signup4screen.kv
 #:include kv/centralpage.kv
-#:include kv/biovalidation.kv
 
 GridLayout: # root widget
     cols: 1
@@ -16,30 +15,27 @@ GridLayout: # root widget
         HomeScreen: # ordering matters here: the "HomeScreen" is ran when running main.py
             name: "home_screen"
             id: home_screen
-        ChatScreen:
+        ChatScreen: # these class names are defined in the KV file heading for the corresponding class name. 
             name: "chat_screen"
             id: chat_screen
         AddFriendScreen:
             name: "add_friend_screen"
             id: add_friend_screen
-        SignupScreen:
-            name: "signup_screen"
-            id: signup_screen
         SettingsScreen:
             name: "settings_screen"
             id: settings_screen
-        FirstBioScreen:
-            name: "first_bio_screen"
-            id: first_bio_screen
-        SecondBioScreen:
-            name: "second_bio_screen"
-            id: second_bio_screen
-        BioValidation:
-            name: "bio_validation_screen"
-            id: bio_validation
-        ThirdBioScreen:
-            name: "third_bio_screen"
-            id: third_bio_screen
+        Signup1Screen:
+            name: "signup_1_screen"
+            id: signup_1_screen
+        Signup2Screen:
+            name: "signup_2_screen"
+            id: signup_2_screen
+        Signup3Screen:
+            name: "signup_3_screen"
+            id: signup_3_screen
+        Signup4Screen:
+            name: "signup_4_screen"
+            id: signup_4_screen
         CentralPage:
             name: "central_page"
             id: central_page

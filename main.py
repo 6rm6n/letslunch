@@ -7,9 +7,6 @@ from kivy.uix.button import ButtonBehavior, Button
 from kivy.uix.label import Label
 from user import User
 from userinfo import UserInfo
-import signup
-import dbGetter
-
 
 class HomeScreen(Screen):
     def doesLike(self):
@@ -21,16 +18,16 @@ class HomeScreen(Screen):
 class ImageButton(ButtonBehavior, Image):
     pass
 
-class SignupScreen(Screen):
+class Signup1Screen(Screen):
     pass
 
-class FirstBioScreen(Screen):
+class Signup2Screen(Screen):
     pass
 
-class SecondBioScreen(Screen):
+class Signup3Screen(Screen):
     pass
 
-class ThirdBioScreen(Screen):
+class Signup4Screen(Screen):
     pass
 
 class SettingsScreen(Screen):
@@ -46,9 +43,6 @@ class CentralPage(Screen):
     pass
 
 class ChatMessage(Label):
-    pass
-
-class BioValidation(Screen):
     pass
 
 GUI = Builder.load_file("main.kv")

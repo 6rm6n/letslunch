@@ -1,5 +1,8 @@
-#Will be called after signup screen
-<FirstBioScreen>:
+# name
+# pronouns
+# major
+
+<Signup2Screen>:
     FloatLayout:
         Label:
             text: "Tell a little bit about yourself first"
@@ -39,7 +42,7 @@
                 #call Myra's validation function
                 
                 app.sign_up(name_input.text, pronouns_input.text, major_input.text)
-                app.change_screen("second_bio_screen")
+                app.change_screen("signup_3_screen")
 
         Label:
             id: message_label

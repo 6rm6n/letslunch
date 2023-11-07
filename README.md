@@ -1,2 +1,2 @@
 # hackathon
-Project for hackathon
+Lets Lunch by Tech for Good.
