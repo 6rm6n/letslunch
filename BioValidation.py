@@ -14,15 +14,19 @@ class LunchApp(App):
 
         # Create text input fields
         self.name_input = TextInput(hint_text='Enter your name', multiline=False)
-        self.location_input = TextInput(hint_text='Enter preferred lunch location', multiline=False)
-        self.time_input = TextInput(hint_text='Enter preferred lunch time', multiline=False)
         
-        self.pressed_buttons = []  # List to store pressed buttons
+        self.pressed_buttons_time = []  # List to store pressed buttons time wise
+        self.pressed_buttons_location = []  # List to store pressed buttons location wise
 
         #buttons for time
         self.noon = Button(text="Noon", font_size=40)
         self.eleven_thirty = Button(text="11:30", font_size=40)
         self.twelve_thirty = Button(text="12:30", font_size=40)
+
+        #buttons for location
+        self.southside = Button(text="Southside", font_size=40)
+        self.ikes = Button(text="Ikes", font_size=40)
+        self.Globe = Button(text="Globe", font_size=40)
         
         # Create an error label for validation messages
         self.error_label = Label(text='', color=(1, 0, 0, 1))
@@ -30,15 +34,18 @@ class LunchApp(App):
         # Create a submit button
         submit_button = Button(text='Submit', on_press=self.validate_inputs)
 
-        #binding or collecting information from buttons
-        self.noon.bind(on_press=self.pressed)
-        self.eleven_thirty.bind(on_press=self.pressed)
-        self.twelve_thirty.bind(on_press=self.pressed)
+        #binding or collecting information from buttons time wise
+        self.noon.bind(on_press=self.pressed_time)
+        self.eleven_thirty.bind(on_press=self.pressed_time)
+        self.twelve_thirty.bind(on_press=self.pressed_time)
+
+        #binding or collecting information from buttons location wise
+        self.southside.bind(on_press=self.pressed_location)
+        self.ikes.bind(on_press=self.pressed_location)
+        self.Globe.bind(on_press=self.pressed_location)
 
         # Add widgets to the layout
         layout.add_widget(self.name_input)
-        layout.add_widget(self.location_input)
-        layout.add_widget(self.time_input)
         layout.add_widget(self.error_label)
 
         #the buttons for the times
@@ -46,7 +53,13 @@ class LunchApp(App):
         layout.add_widget(self.eleven_thirty)
         layout.add_widget(self.twelve_thirty)
 
-        self.label = Label(text="Button Pressed: None")
+        #the buttons for the locations
+        layout.add_widget(self.southside)
+        layout.add_widget(self.ikes)
+        layout.add_widget(self.Globe)
+
+        #validating what buttons are pressed
+        self.label = Label(text="")
 
         layout.add_widget(submit_button)
 
@@ -55,22 +68,27 @@ class LunchApp(App):
     def validate_inputs(self, instance):
         # Retrieve user input
         name = self.name_input.text.strip()
-        location = self.location_input.text.strip()
-        time = self.time_input.text.strip()
 
         # Check if any of the fields are empty
-        if not name or not location or not time:
-            self.error_label.text = 'Please fill in all fields.'
+        if not name:
+            self.error_label.text = 'Please fill in Name field.'
         else:
             # All fields are filled, display a success message (you can perform other actions here)
             self.error_label.text = f'your input is successful!'
 
     #button pressed or not, these are times that someone has lunch at
-    def pressed(self, instance):
+    def pressed_time(self, instance):
         button_text = instance.text
-        if button_text not in self.pressed_buttons:
-            self.pressed_buttons.append(button_text)
-        self.label.text = "Buttons Pressed: " + ", ".join(self.pressed_buttons)
+        if button_text not in self.pressed_buttons_time:
+            self.pressed_buttons_time.append(button_text)
+        print(self.pressed_buttons_time)
+
+    #button pressed or not, these are locations that someone has lunch at
+    def pressed_location(self, instance):
+        button_text = instance.text
+        if button_text not in self.pressed_buttons_location:
+            self.pressed_buttons_location.append(button_text)
+        print(self.pressed_buttons_location)
 
 if __name__ == '__main__':
     LunchApp().run()
