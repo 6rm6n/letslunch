@@ -1,0 +1,50 @@
+<BioValidation>:
+        # lunch.kv file
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        TextInput:
+            id: name_input
+            hint_text: 'Enter your name'
+            multiline: False
+
+        Label:
+            id: error_label
+            text: ''
+            color: 1, 0, 0, 1
+
+        Button:
+            text: 'Noon'
+            font_size: 40
+            on_press: app.pressed_time(self)
+
+        Button:
+            text: '11:30'
+            font_size: 40
+            on_press: app.pressed_time(self)
+
+        Button:
+            text: '12:30'
+            font_size: 40
+            on_press: app.pressed_time(self)
+
+        Button:
+            text: 'Southside'
+            font_size: 40
+            on_press: app.pressed_location(self)
+
+        Button:
+            text: 'Ikes'
+            font_size: 40
+            on_press: app.pressed_location(self)
+
+        Button:
+            text: 'Globe'
+            font_size: 40
+            on_press: app.pressed_location(self)
+
+        Button:
+            text: 'Submit'
+            on_press: app.validate_inputs(self)

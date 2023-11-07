@@ -7,6 +7,7 @@
 #:include kv/secondbioscreen.kv
 #:include kv/thirdbioscreen.kv
 #:include kv/centralpage.kv
+#:include kv/biovalidation.kv
 
 GridLayout: # root widget
     cols: 1
@@ -33,6 +34,9 @@ GridLayout: # root widget
         SecondBioScreen:
             name: "second_bio_screen"
             id: second_bio_screen
+        BioValidation:
+            name: "bio_validation_screen"
+            id: bio_validation
         ThirdBioScreen:
             name: "third_bio_screen"
             id: third_bio_screen

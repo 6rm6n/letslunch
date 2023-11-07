@@ -47,6 +47,8 @@ class CentralPage(Screen):
 
 class ChatMessage(Label):
     pass
+class BioValidation(Screen):
+    pass
 
 GUI = Builder.load_file("main.kv")
 class MainApp(App):
