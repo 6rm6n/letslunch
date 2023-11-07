@@ -16,18 +16,38 @@ class LunchApp(App):
         self.name_input = TextInput(hint_text='Enter your name', multiline=False)
         self.location_input = TextInput(hint_text='Enter preferred lunch location', multiline=False)
         self.time_input = TextInput(hint_text='Enter preferred lunch time', multiline=False)
+        
+        self.pressed_buttons = []  # List to store pressed buttons
 
+        #buttons for time
+        self.noon = Button(text="Noon", font_size=40)
+        self.eleven_thirty = Button(text="11:30", font_size=40)
+        self.twelve_thirty = Button(text="12:30", font_size=40)
+        
         # Create an error label for validation messages
         self.error_label = Label(text='', color=(1, 0, 0, 1))
 
         # Create a submit button
         submit_button = Button(text='Submit', on_press=self.validate_inputs)
 
+        #binding or collecting information from buttons
+        self.noon.bind(on_press=self.pressed)
+        self.eleven_thirty.bind(on_press=self.pressed)
+        self.twelve_thirty.bind(on_press=self.pressed)
+
         # Add widgets to the layout
         layout.add_widget(self.name_input)
         layout.add_widget(self.location_input)
         layout.add_widget(self.time_input)
         layout.add_widget(self.error_label)
+
+        #the buttons for the times
+        layout.add_widget(self.noon)
+        layout.add_widget(self.eleven_thirty)
+        layout.add_widget(self.twelve_thirty)
+
+        self.label = Label(text="Button Pressed: None")
+
         layout.add_widget(submit_button)
 
         return layout
@@ -45,6 +65,12 @@ class LunchApp(App):
             # All fields are filled, display a success message (you can perform other actions here)
             self.error_label.text = f'your input is successful!'
 
+    #button pressed or not, these are times that someone has lunch at
+    def pressed(self, instance):
+        button_text = instance.text
+        if button_text not in self.pressed_buttons:
+            self.pressed_buttons.append(button_text)
+        self.label.text = "Buttons Pressed: " + ", ".join(self.pressed_buttons)
 
 if __name__ == '__main__':
     LunchApp().run()

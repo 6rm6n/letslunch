@@ -11,7 +11,6 @@ import signup
 import dbGetter
 
 
-
 class HomeScreen(Screen):
     def doesLike(self):
         pass
