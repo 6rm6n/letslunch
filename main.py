@@ -50,7 +50,7 @@ class MainApp(App):
     def build(self):
         self.user = None
         return GUI
-
+    
     def change_screen(self, screen_name):
         # get the screen manager from the kv file
         screen_manager = self.root.ids['screen_manager'] # root: the main widget in the layout
@@ -62,5 +62,17 @@ class MainApp(App):
     def sign_up(self, email, username, password):
         self.user = User()
         self.user.init_SignIn(email, username, password)
+
+    button_text_list_location = []
+    button_text_list_time = []
+
+    def pressed_location(self, button_text):
+        self.button_text_list_location.append(button_text)
+        print(f'Button location text list: {self.button_text_list_location}')
+
+    def pressed_time(self, button_text):
+        self.button_text_list_time.append(button_text)
+        print(f'Button time text list: {self.button_text_list_time}')
+    
 
 MainApp().run()
