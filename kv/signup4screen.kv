@@ -56,6 +56,7 @@
 
         Button:
             text: 'Submit'
-            on_press: app.validate_inputs(self)
+            on_press: 
+                app.capture_name(name_input.text)
             on_release: app.change_screen("home_screen")
             background_color: 1, 0, 0, 1

@@ -92,6 +92,8 @@ class MainApp(App):
             self.button_text_list_time.remove(button_text)
 
         print(f'Button time text list: {self.button_text_list_time}')
-    
+    def capture_name(self, name):
+        print(f"The name entered is: {name}")
+
 
 MainApp().run()
