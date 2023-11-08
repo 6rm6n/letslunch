@@ -67,11 +67,17 @@ class MainApp(App):
     button_text_list_time = []
 
     def pressed_location(self, button_text):
-        self.button_text_list_location.append(button_text)
+        if(button_text not in self.button_text_list_location):
+            self.button_text_list_location.append(button_text)
+        else :
+            self.button_text_list_location.remove(button_text)
         print(f'Button location text list: {self.button_text_list_location}')
 
     def pressed_time(self, button_text):
-        self.button_text_list_time.append(button_text)
+        if(button_text not in self.button_text_list_time):
+            self.button_text_list_time.append(button_text)
+        else :
+            self.button_text_list_time.remove(button_text)
         print(f'Button time text list: {self.button_text_list_time}')
     
 
