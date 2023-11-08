@@ -66,18 +66,31 @@ class MainApp(App):
     button_text_list_location = []
     button_text_list_time = []
 
-    def pressed_location(self, button_text):
-        if(button_text not in self.button_text_list_location):
+    def pressed_location(self, button_instance):
+        if button_instance.background_color == [1, 0, 0, 1]:  # If the button is red
+            button_instance.background_color = [0, 1, 0, 1]
+        else :
+            button_instance.background_color = [1, 0, 0, 1]
+
+        button_text = button_instance.text # text
+        if(button_instance.text not in self.button_text_list_location):
             self.button_text_list_location.append(button_text)
         else :
             self.button_text_list_location.remove(button_text)
         print(f'Button location text list: {self.button_text_list_location}')
 
-    def pressed_time(self, button_text):
+    def pressed_time(self, button_instance):
+        if button_instance.background_color == [1, 0, 0, 1]:  # If the button is red
+            button_instance.background_color = [0, 1, 0, 1]
+        else :
+            button_instance.background_color = [1, 0, 0, 1]
+
+        button_text = button_instance.text # text
         if(button_text not in self.button_text_list_time):
             self.button_text_list_time.append(button_text)
         else :
             self.button_text_list_time.remove(button_text)
+
         print(f'Button time text list: {self.button_text_list_time}')
     
 

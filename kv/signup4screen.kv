@@ -2,7 +2,6 @@
 # where do you have lunch?
 
 <Signup4Screen>:
-        # lunch.kv file
     BoxLayout:
         orientation: 'vertical'
         padding: 10
@@ -21,35 +20,42 @@
         Button:
             text: 'Noon'
             font_size: 40
-            on_press: app.pressed_time(self.text)
+            on_press: app.pressed_time(self)
+            background_color: 1, 0, 0, 1
+            
 
         Button:
             text: '11:30'
             font_size: 40
-            on_press: app.pressed_time(self.text)
+            on_press: app.pressed_time(self)
+            background_color: 1, 0, 0, 1
 
         Button:
             text: '12:30'
             font_size: 40
-            on_press: app.pressed_time(self.text)
+            on_press: app.pressed_time(self)
+            background_color: 1, 0, 0, 1
 
         Button:
             text: 'Southside'
             font_size: 40
-            on_press: app.pressed_location(self.text)
+            on_press: app.pressed_location(self)
+            background_color: 1, 0, 0, 1
 
         Button:
             text: 'Ikes'
             font_size: 40
-            on_press: app.pressed_location(self.text)
+            on_press: app.pressed_location(self)
+            background_color: 1, 0, 0, 1
 
         Button:
             text: 'Globe'
             font_size: 40
-            on_press: app.pressed_location(self.text)
+            on_press: app.pressed_location(self)
+            background_color: 1, 0, 0, 1
 
         Button:
             text: 'Submit'
-            on_press: app.validate_inputs(self.text)
-            on_release:
-                app.change_screen("home_screen")
+            on_press: app.validate_inputs(self)
+            on_release: app.change_screen("home_screen")
+            background_color: 1, 0, 0, 1
