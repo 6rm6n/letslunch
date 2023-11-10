@@ -59,9 +59,9 @@ class MainApp(App):
         #screen_manager = self.root.ids
     
     # Initializes user signup, called by firstbioscreen
-    def sign_up(self, email, username, password):
+    def sign_up(self, name, pronoun, major):
         self.user = User()
-        self.user.init_SignIn(email, username, password)
+        self.user.init_SignIn(name, pronoun, major)
 
     button_text_list_location = []
     button_text_list_time = []
@@ -92,8 +92,13 @@ class MainApp(App):
             self.button_text_list_time.remove(button_text)
 
         print(f'Button time text list: {self.button_text_list_time}')
-    def capture_name(self, name):
+    
+    def capture_signup2(self, name, pronoun, major):
         print(f"The name entered is: {name}")
+        print(f"The pronoun entered is: {pronoun}")
+        print(f"The major entered is: {major}")
 
+    def capture_signup3(self, about):
+        print(f"The about entered is: {about}")
 
 MainApp().run()
