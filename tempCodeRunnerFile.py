@@ -31,13 +31,7 @@ class Signup4Screen(Screen):
     pass
 
 class Signup5Screen(Screen):
-    
-    def selected(self, filename): # image selection
-        try:
-            self.ids.profile_picture.source = filename[0]
-            #print(filename[0]) # TESTING: prints your img/file selection to terminal
-        except:
-            pass
+    pass
 
 class SettingsScreen(Screen):
     pass

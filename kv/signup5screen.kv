@@ -1,0 +1,22 @@
+# file used to access user photos, for profile picture
+
+<Signup5Screen>:
+    id: my_widget
+    BoxLayout:
+
+        orientation: "vertical"
+        size: root.width, root.height
+
+        padding: 50
+        spacing: 20
+
+        Image:
+            id: profile_picture
+            source: ""
+
+
+        #FileChooserIconView:
+        FileChooserListView:
+            id: filechooser
+            path: '/Users/arman/Documents'
+            on_selection: my_widget.selected(filechooser.selection)
