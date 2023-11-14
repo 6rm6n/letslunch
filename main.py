@@ -6,7 +6,6 @@ from kivy.uix.image import Image
 from kivy.uix.button import ButtonBehavior, Button
 from kivy.uix.label import Label
 from user import User
-from userinfo import UserInfo
 
 class HomeScreen(Screen):
     def doesLike(self):
@@ -68,9 +67,9 @@ class MainApp(App):
         #screen_manager = self.root.ids
     
     # Initializes user signup, called by firstbioscreen
-    def sign_up(self, name, pronoun, major):
+    def sign_up(self, email, username, password):
         self.user = User()
-        self.user.init_SignIn(name, pronoun, major)
+        self.user.init_SignUp(email, username, password)
 
     button_text_list_location = []
     button_text_list_time = []

@@ -1,10 +1,4 @@
-from kivy.app import App
-from kivy.uix.textinput import TextInput
-from kivy.uix.boxlayout import BoxLayout
-from userinfo import UserInfo
-
-
-
+import userinfo
 
 class User:
     def __init__(self):
@@ -17,9 +11,9 @@ class User:
         self.favfood = None # Icon for what the person is eating
 
     # Will be called when Sign up Button is pressed or in settings
-    def init_SignIn(self, email, username, password):
-        self.userInfo = UserInfo(email, username, password)
-
+    def init_SignUp(self, email, username, password):
+        self.userInfo = userinfo.signup(email, password)
+        userinfo.setUsername(self.userInfo, username)
     #def init_UserInfo(self, name, pronouns, major, ):
 
 
