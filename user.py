@@ -14,6 +14,7 @@ class User:
     def init_SignUp(self, email, username, password):
         self.userInfo = userinfo.signup(email, password)
         userinfo.setUsername(self.userInfo, username)
+        userinfo.setEmail(self.userInfo)
     #def init_UserInfo(self, name, pronouns, major, ):
 
 
