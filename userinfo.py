@@ -19,9 +19,13 @@ Firebase file functions
  emailVerified(user): Check if user's email is verified. 
  Returns True if email is verified, False otherwise.
 
- setUsername(user, name): Add user's name to database. Returns None.
+ setUsername(user, name): Add or set user's name to database. Returns None.
 
- updateUsername(user, name): Update user's name to database. Returns None.
+ setPronouns(user, pronouns): Add or set user's pronouns to database. Returns None.
+
+ setMajor(user, major): Add or set user's major to database. Returns None.
+
+ setBio(user, bio): Add or set user's bio to database. Returns None.
 '''
  
 
@@ -107,7 +111,7 @@ def signup(email, password):
     except requests.HTTPError as e:
         return processHttpError(e)
 
-def signin():
+def signin(email, password):
     """
     Sign in an existing user.
 
@@ -115,9 +119,7 @@ def signin():
         dict: User's authentication token and other details.
         None: If signin fails.
     """
-    try:
-        email = input("Enter your email: ")
-        password = input("Enter your password: ")      
+    try:   
         user = auth.sign_in_with_email_and_password(email, password)
         print("Signin successful!")
         return user
@@ -147,7 +149,7 @@ def emailVerified(user):
 
 def setUsername(user, name):
     """
-    Add user's name to database for the first time.
+    Add or set user's name to database.
     """
     try:
         email = auth.get_account_info(user['idToken'])['users'][0]['email']
@@ -156,35 +158,33 @@ def setUsername(user, name):
     except Exception as e:
         print("Database Error", e)
 
-
-
-def test():
+def setPronouns(user, pronouns):
     """
-    Main function.
+    Add or set user's pronouns to database.
     """
-    running = True
-    user = None
-    while running:
-        print("1. Sign up")
-        print("2. Sign in")
-        print("3. Exit")
-        choice = int(input("Enter your choice: "))
-        if choice == 1:
-            user = signup()
-        elif choice == 2:
-            user = signin()
+    try:
+        data = {"pronouns": pronouns}
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
 
-            if user is None:
-                continue
+def setMajor(user, major):
+    """
+    Add or set user's major to database.
+    """
+    try:
+        data = {"major": major}
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
 
-            if emailVerified(user):
-                print("Email verified!")
-                setUsername(user, input("Enter your username: "))
-                print("Username added to database!")
-            else:
-                print("Email not verified!")
-                user = None
-        elif choice == 3:
-            running = False
-        else:
-            print("Invalid choice!")
+def setBio(user, bio):
+    """
+    Add or set user's bio to database.
+    """
+    try:
+        data = {"bio": bio}
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
+
