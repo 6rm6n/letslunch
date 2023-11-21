@@ -26,6 +26,8 @@ Firebase file functions
  setMajor(user, major): Add or set user's major to database. Returns None.
 
  setBio(user, bio): Add or set user's bio to database. Returns None.
+
+ setEmail(user): Add or set user's email to database. Returns None.
 '''
  
 
@@ -146,14 +148,23 @@ def emailVerified(user):
     except requests.HTTPError as e:
         return processHttpError(e)
 
+def setEmail(user):
+    """
+    Add or set user's email to database.
+    """
+    try:
+        email = auth.get_account_info(user['idToken'])['users'][0]['email']
+        data = {"email": email}
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
 
 def setUsername(user, name):
     """
     Add or set user's name to database.
     """
     try:
-        email = auth.get_account_info(user['idToken'])['users'][0]['email']
-        data = {"name": name, "email": email}
+        data = {"name": name}
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
