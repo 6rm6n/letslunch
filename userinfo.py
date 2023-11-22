@@ -154,7 +154,10 @@ def setEmail(user):
     """
     try:
         email = auth.get_account_info(user['idToken'])['users'][0]['email']
-        data = {"email": email}
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['email'] = email
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
@@ -164,7 +167,10 @@ def setUsername(user, name):
     Add or set user's name to database.
     """
     try:
-        data = {"name": name}
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['name'] = name
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
@@ -174,7 +180,10 @@ def setPronouns(user, pronouns):
     Add or set user's pronouns to database.
     """
     try:
-        data = {"pronouns": pronouns}
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['pronouns'] = pronouns
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
@@ -184,7 +193,10 @@ def setMajor(user, major):
     Add or set user's major to database.
     """
     try:
-        data = {"major": major}
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['major'] = major
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
@@ -194,7 +206,10 @@ def setBio(user, bio):
     Add or set user's bio to database.
     """
     try:
-        data = {"bio": bio}
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['bio'] = bio
         database.child("users").child(user['localId']).set(data, user['idToken'])
     except Exception as e:
         print("Database Error", e)
