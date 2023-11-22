@@ -13,8 +13,9 @@ class User:
     # Will be called when Sign up Button is pressed or in settings
     def init_SignUp(self, email, username, password):
         self.userInfo = userinfo.signup(email, password)
-        userinfo.setUsername(self.userInfo, username)
         userinfo.setEmail(self.userInfo)
+        userinfo.setUsername(self.userInfo, username)
+        
     #def init_UserInfo(self, name, pronouns, major, ):
 
 
