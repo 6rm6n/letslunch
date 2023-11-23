@@ -65,11 +65,6 @@ class MainApp(App):
         screen_manager.transition = NoTransition()  # You can change the direction to "right", "up", "down", etc.
         screen_manager.current = screen_name
         #screen_manager = self.root.ids
-    
-    # Initializes user signup, called by firstbioscreen
-    def sign_up(self, email, username, password):
-        self.user = User()
-        self.user.init_SignUp(email, username, password)
 
     button_text_list_location = []
     button_text_list_time = []
@@ -100,13 +95,22 @@ class MainApp(App):
             self.button_text_list_time.remove(button_text)
 
         print(f'Button time text list: {self.button_text_list_time}')
-    
+
+    # Initializes user signup
+    def sign_up(self, email, username, password):
+        self.user = User()
+        self.user.init_SignUp(email, username, password)
+
+    user_info = {}
     def capture_signup2(self, name, pronoun, major):
         print(f"The name entered is: {name}")
         print(f"The pronoun entered is: {pronoun}")
         print(f"The major entered is: {major}")
+        self.user_info['name'] = name
+        self.user_info['pronoun'] = pronoun
+        self.user_info['major'] = major
 
     def capture_signup3(self, about):
         print(f"The about entered is: {about}")
-
+        self.user.init_UserInfo(self.user_info['name'], self.user_info['pronoun'], self.user_info['major'], about)
 MainApp().run()

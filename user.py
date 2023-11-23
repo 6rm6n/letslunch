@@ -4,20 +4,18 @@ class User:
     def __init__(self):
         self.userInfo = None
         self.lunchCount = 0
-        self.rating = 0.0
-        self.ratingCount = 0 # Used to calculate the actual rating
-        self.avatar = None
+        self.rating = 0
+        self.ratingCount = 0
         self.location = None
         self.favfood = None # Icon for what the person is eating
 
-    # Will be called when Sign up Button is pressed or in settings
+    # Will be called when Sign up Button is pressed
     def init_SignUp(self, email, username, password):
         self.userInfo = userinfo.signup(email, password)
-        userinfo.setEmail(self.userInfo)
-        userinfo.setUsername(self.userInfo, username)
+        userinfo.setSignupInfo(self.userInfo, username)
         
-    #def init_UserInfo(self, name, pronouns, major, ):
-
+    def init_UserInfo(self, name, pronouns, major, bio):
+        userinfo.setUserInfo(self.userInfo, name, pronouns, major, bio)
 
 
     # Called when a lunch session with the user is finished

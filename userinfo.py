@@ -19,8 +19,10 @@ Firebase file functions
  emailVerified(user): Check if user's email is verified. 
  Returns True if email is verified, False otherwise.
 
- setUsername(user, name): Add or set user's name to database. Returns None.
+ setUsername(user, name): Add or set user's Username to database. Returns None.
 
+ setName(user, name): Add or set user's name to database. Returns None.
+ 
  setPronouns(user, pronouns): Add or set user's pronouns to database. Returns None.
 
  setMajor(user, major): Add or set user's major to database. Returns None.
@@ -28,6 +30,10 @@ Firebase file functions
  setBio(user, bio): Add or set user's bio to database. Returns None.
 
  setEmail(user): Add or set user's email to database. Returns None.
+
+ setSignupInfo(user, name, email): Add or set user's username and email to database. Returns None.
+
+ setUserInfo(user, name, pronouns, major, bio): Add or set user's name, pronouns, major, and bio to database. Returns None.
 '''
  
 
@@ -164,6 +170,19 @@ def setEmail(user):
 
 def setUsername(user, name):
     """
+    Add or set user's Username to database.
+    """
+    try:
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['username'] = name
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
+
+def setName(user, name):
+    """
     Add or set user's name to database.
     """
     try:
@@ -214,3 +233,33 @@ def setBio(user, bio):
     except Exception as e:
         print("Database Error", e)
 
+def setSignupInfo(user, name):
+    """
+    Add or set user's Username and email to database.
+    """
+    try:
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        email = auth.get_account_info(user['idToken'])['users'][0]['email']
+        data['username'] = name
+        data['email'] = email
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
+
+def setUserInfo(user, name, pronouns, major, bio):
+    """
+    Add or set user's name, pronouns, major, and bio to database.
+    """
+    try:
+        data = database.child("users").child(user['localId']).get(user['idToken']).val()
+        if data is None:
+            data = {}
+        data['name'] = name
+        data['pronouns'] = pronouns
+        data['major'] = major
+        data['bio'] = bio
+        database.child("users").child(user['localId']).set(data, user['idToken'])
+    except Exception as e:
+        print("Database Error", e)
