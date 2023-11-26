@@ -1,8 +1,8 @@
-import userinfo
+import database
 
 class User:
     def __init__(self):
-        self.userInfo = None
+        self.database = None
         self.lunchCount = 0
         self.rating = 0
         self.ratingCount = 0
@@ -11,11 +11,11 @@ class User:
 
     # Will be called when Sign up Button is pressed
     def init_SignUp(self, email, username, password):
-        self.userInfo = userinfo.signup(email, password)
-        userinfo.setSignupInfo(self.userInfo, username)
+        self.database = database.signup(email, password)
+        database.setSignupInfo(self.database, username)
         
-    def init_UserInfo(self, name, pronouns, major, bio):
-        userinfo.setUserInfo(self.userInfo, name, pronouns, major, bio)
+    def init_Database(self, name, pronouns, major, bio):
+        database.setUserInfo(self.database, name, pronouns, major, bio)
 
 
     # Called when a lunch session with the user is finished
