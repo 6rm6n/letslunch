@@ -112,5 +112,5 @@ class MainApp(App):
 
     def capture_signup3(self, about):
         print(f"The about entered is: {about}")
-        self.user.init_UserInfo(self.user_info['name'], self.user_info['pronoun'], self.user_info['major'], about)
+        self.user.init_Database(self.user_info['name'], self.user_info['pronoun'], self.user_info['major'], about)
 MainApp().run()
