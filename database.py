@@ -2,6 +2,8 @@ import pyrebase # pip install pyrebase4
 import requests
 import re
 import json
+import asyncio
+
 '''
 Firebase file functions
 
@@ -53,6 +55,7 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 database = firebase.database()
 
+
 def processHttpError(e):
     """
     Process HTTP error.
@@ -78,20 +81,45 @@ def processHttpError(e):
 
     return None
 
-def authenticate_user(user):
+async def emailVerified(user):
+    """
+    Check if user's email is verified.
+
+    Args:
+        user (dict): User's authentication token and other details.
+
+    Returns:
+        bool: True if email is verified, False otherwise.
+    """
+    if user is None:        
+        return False
+    try:
+        # gives the user 3 minutes to verify their email
+        for _ in range(180):
+            # wait 1 second
+            await asyncio.sleep(1)
+            is_verified = auth.get_account_info(user['idToken'])['users'][0]['emailVerified']
+            if is_verified:
+                return True
+        return False
+    except requests.HTTPError as e:
+        return processHttpError(e)
+
+async def authenticate_user(user):
     """
     Authenticate user with email and password.
 
     Args:
-        email (str): User's email address.
-        password (str): User's password.
+        user (dict): User info from the firebase database
 
     Returns:
         True if authentication is successful, False otherwise.
     """
     try:
+        print("Authenticating user...")
         auth.send_email_verification(user['idToken'])
-        return True
+        # awaits the user to verify their email
+        return await emailVerified(user)
     except requests.HTTPError as e:
         processHttpError(e)
         return False
@@ -100,22 +128,32 @@ def signup(email, password):
     """
     Sign up a new user.
 
+    Args:
+        email (str): User's email address.
+        password (str): User's password.
+
     Returns:
         dict: User's authentication token and other details.
         None: If signup fails.
     """
     try:
-
-        # Check if email ends with @gmu.edu
         """
         if not re.match(r"[^@]+@gmu\.edu", email):
             print("Please use a GMU email address.")
             return None
         """ 
+        
         user = auth.create_user_with_email_and_password(email, password)
         print("Signup successful, verify your email to use app.")
-        authenticate_user(user)
-        return user
+        
+        # Run the authentication process asynchronously
+        is_authenticated = asyncio.run(authenticate_user(user)) 
+        
+        if is_authenticated:
+            print("Email verified, you can now use the app.")
+            return user
+        else:
+            auth.delete_user_account(user['idToken'])
     except requests.HTTPError as e:
         return processHttpError(e)
 
@@ -131,26 +169,6 @@ def signin(email, password):
         user = auth.sign_in_with_email_and_password(email, password)
         print("Signin successful!")
         return user
-    except requests.HTTPError as e:
-        return processHttpError(e)
-
-def emailVerified(user):
-    """
-    Check if user's email is verified.
-
-    Args:
-        user (dict): User's authentication token and other details.
-
-    Returns:
-        bool: True if email is verified, False otherwise.
-    """
-    if user is None:        
-        return False
-    try:
-        if auth.get_account_info(user['idToken'])['users'][0]['emailVerified']:
-            return True
-        else:
-            return False
     except requests.HTTPError as e:
         return processHttpError(e)
 
