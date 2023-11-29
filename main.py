@@ -7,6 +7,9 @@ from kivy.uix.button import ButtonBehavior, Button
 from kivy.uix.label import Label
 from user import User
 from userinfo import UserInfo
+import socket
+import os
+import subprocess
 
 class HomeScreen(Screen):
     def doesLike(self):
@@ -55,6 +58,7 @@ class ChatMessage(Label):
     pass
 
 GUI = Builder.load_file("main.kv")
+
 class MainApp(App):
     def build(self):
         self.user = None
@@ -109,5 +113,38 @@ class MainApp(App):
 
     def capture_signup3(self, about):
         print(f"The about entered is: {about}")
+
+    def execute_python_file(file_path):
+        try:
+            completed_process = subprocess.run(['python', file_path], capture_output=True, text=True)
+            if completed_process.returncode == 0:
+                print("Execution successful.")
+                print("Output:")
+                print(completed_process.stdout)
+            else:
+                print(f"Error: Failed to execute '{file_path}'.")
+                print("Error output:")
+                print(completed_process.stderr)
+        except FileNotFoundError:
+            print(f"Error: The file '{file_path}' does not exist.")
+
+    def sendMessage(self, message):
+        execute_python_file('server.py')
+
+        hostname = socket.gethostname()
+        HOST = socket.gethostbyname(hostname)
+        PORT = 65432  # The port used by the server    
+
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind((HOST, PORT))
+            s.listen()
+            conn, addr = s.accept()
+            with conn:
+                print(f"Connected by {addr}")
+                while True:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
+                    conn.sendall(data)
 
 MainApp().run()

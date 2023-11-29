@@ -3,9 +3,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from userinfo import UserInfo
 
-
-
-
 class User:
     def __init__(self):
         self.userInfo = None
